@@ -1,0 +1,118 @@
+.item {
+  display: flex;
+  gap: 1rem;
+
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.item img {
+  width: 90px;
+  height: 90px;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  background: #f9fafb;
+
+  padding: 6px;
+}
+
+.info {
+  flex: 1;
+}
+
+.info h4 {
+  margin-bottom: 6px;
+
+  font-size: 0.95rem;
+
+  line-height: 1.4;
+
+  color: #111827;
+}
+
+.info p {
+  margin-bottom: 8px;
+
+  color: #6b7280;
+
+  font-size: 0.9rem;
+}
+
+.priceSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 0.75rem;
+}
+
+.priceSection strong {
+  font-size: 1rem;
+}
+
+.priceSection span {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin-bottom: 0.75rem;
+}
+
+.actions button {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #111827;
+  color: white;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.actions button:hover {
+  background: #2563eb;
+}
+
+.actions span {
+  min-width: 20px;
+
+  text-align: center;
+
+  font-weight: 600;
+}
+
+.remove {
+  border: none;
+
+  background: transparent;
+
+  color: #dc2626;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.remove:hover {
+  color: #991b1b;
+}

@@ -1,0 +1,129 @@
+@keyframes shimmer {
+  0% {
+    background-position: -500px 0;
+  }
+
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+.container {
+  max-width: 1280px;
+
+  margin: 3rem auto;
+
+  padding: 0 2rem;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 5rem;
+}
+
+.imageSection {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.mainImage,
+.thumb,
+.brand,
+.title,
+.price,
+.description,
+.descriptionShort,
+.selector,
+.button {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+
+  background-size: 500px 100%;
+
+  animation: shimmer 1.3s infinite linear;
+
+  border-radius: 10px;
+}
+
+.mainImage {
+  height: 500px;
+}
+
+.thumbnails {
+  display: flex;
+
+  gap: 12px;
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  width: 120px;
+  height: 16px;
+
+  margin-bottom: 1rem;
+}
+
+.title {
+  width: 80%;
+  height: 42px;
+
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  width: 160px;
+  height: 32px;
+
+  margin-bottom: 2rem;
+}
+
+.description {
+  width: 100%;
+  height: 16px;
+
+  margin-bottom: 0.8rem;
+}
+
+.descriptionShort {
+  width: 70%;
+  height: 16px;
+
+  margin-bottom: 2rem;
+}
+
+.selector {
+  width: 100%;
+  height: 50px;
+
+  margin-bottom: 1.25rem;
+}
+
+.button {
+  width: 100%;
+  height: 52px;
+
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+
+    gap: 2rem;
+  }
+
+  .mainImage {
+    height: 350px;
+  }
+}

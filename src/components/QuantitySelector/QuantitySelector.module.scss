@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  background: #111827;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
