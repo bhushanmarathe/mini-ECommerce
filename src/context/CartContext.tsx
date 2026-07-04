@@ -6,12 +6,18 @@ import {
   useState,
   type ReactNode,
 } from "react";
+
+// import toast from "react-hot-toast";
+
 import type { CartItem } from "../types/product";
 
 interface CartContextType {
   cart: CartItem[];
 
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: CartItem) => {
+    success: boolean;
+    message: string;
+  };
 
   removeFromCart: (productId: number, variantId: string) => void;
 
@@ -40,27 +46,53 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [cart]);
 
   function addToCart(item: CartItem) {
-    setCart((prev) => {
-      const existing = prev.find(
-        (cartItem) =>
-          cartItem.productId === item.productId &&
-          cartItem.variantId === item.variantId,
-      );
+    const existing = cart.find(
+      (cartItem) =>
+        cartItem.productId === item.productId &&
+        cartItem.variantId === item.variantId,
+    );
 
-      if (existing) {
-        return prev.map((cartItem) =>
+    if (existing) {
+      const newQuantity = existing.quantity + item.quantity;
+
+      if (newQuantity > existing.stock) {
+        return {
+          success: false,
+          message: `Only ${existing.stock} item(s) available.`,
+        };
+      }
+
+      setCart((prev) =>
+        prev.map((cartItem) =>
           cartItem.productId === item.productId &&
           cartItem.variantId === item.variantId
             ? {
                 ...cartItem,
-                quantity: cartItem.quantity + item.quantity,
+                quantity: newQuantity,
               }
             : cartItem,
-        );
-      }
+        ),
+      );
 
-      return [...prev, item];
-    });
+      return {
+        success: true,
+        message: "Added to cart",
+      };
+    }
+
+    if (item.quantity > item.stock) {
+      return {
+        success: false,
+        message: `Only ${item.stock} item(s) available.`,
+      };
+    }
+
+    setCart((prev) => [...prev, item]);
+
+    return {
+      success: true,
+      message: "Added to cart",
+    };
   }
 
   function removeFromCart(productId: number, variantId: string) {
@@ -74,14 +106,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   function increaseQuantity(productId: number, variantId: string) {
     setCart((prev) =>
-      prev.map((item) =>
-        item.productId === productId && item.variantId === variantId
-          ? {
-              ...item,
-              quantity: item.quantity + 1,
-            }
-          : item,
-      ),
+      prev.map((item) => {
+        if (item.productId === productId && item.variantId === variantId) {
+          if (item.quantity >= item.stock) {
+            return item;
+          }
+
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        }
+
+        return item;
+      }),
     );
   }
 

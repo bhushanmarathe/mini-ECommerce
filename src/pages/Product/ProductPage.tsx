@@ -65,7 +65,7 @@ export default function ProductPage() {
   };
 
   const handleAddToCart = () => {
-    addToCart({
+    const result = addToCart({
       productId: product.id,
       variantId: selectedVariant.id,
       title: product.title,
@@ -74,9 +74,16 @@ export default function ProductPage() {
       color: selectedVariant.color,
       size: selectedVariant.size,
       quantity,
+      stock: selectedVariant.stock,
     });
 
-    toast.success("Added to cart!");
+    if (result.success) {
+      toast.success(result.message);
+    } else {
+      toast.error(result.message);
+    }
+
+    //toast.success("Added to cart!");
   };
 
   return (

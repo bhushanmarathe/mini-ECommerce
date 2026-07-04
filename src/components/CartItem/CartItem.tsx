@@ -40,8 +40,14 @@ export default function CartItem({ item }: Props) {
           <span>{item.quantity}</span>
 
           <button
-            aria-label="Increase quantity"
-            onClick={() => increaseQuantity(item.productId, item.variantId)}
+            onClick={() => {
+              if (item.quantity >= item.stock) {
+                toast.error("Maximum available stock reached.");
+                return;
+              }
+
+              increaseQuantity(item.productId, item.variantId);
+            }}
           >
             +
           </button>

@@ -13,26 +13,34 @@ interface Props {
 export default function ProductCard({ product }: Props) {
   const { addToCart } = useCart();
 
-  //   const defaultVariant = product.variants[0];
+  function handleQuickAdd() {
+    const defaultVariant = product.variants[0];
 
-  //   function handleQuickAdd() {
-  //     addToCart({
-  //       productId: product.id,
-  //       variantId: defaultVariant.id,
-  //       title: product.title,
-  //       image: product.images[0].url,
-  //       price: product.price,
-  //       color: defaultVariant.color,
-  //       size: defaultVariant.size,
-  //       quantity: 1,
-  //     });
+    const result = addToCart({
+      productId: product.id,
+      variantId: defaultVariant.id,
+      title: product.title,
+      image: product.images[0].url,
+      price: product.price,
+      color: defaultVariant.color,
+      size: defaultVariant.size,
+      quantity: 1,
+      stock: defaultVariant.stock,
+    });
 
-  //     toast.success("Added to cart");
-  //   }
+    if (result.success) {
+      toast.success(result.message);
+    } else {
+      toast.error(result.message);
+    }
+  }
 
   return (
     <div className={styles.card}>
-      <Link to={`/product/${product.id}`}>
+      <Link
+        to={`/product/${product.id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
         <img
           src={product.images[0].url}
           alt={product.title}
@@ -48,22 +56,7 @@ export default function ProductCard({ product }: Props) {
         type="button"
         className={styles.button}
         aria-label={`Quick add ${product.title}`}
-        onClick={(e) => {
-          e.preventDefault();
-
-          addToCart({
-            productId: product.id,
-            variantId: product.variants[0].id,
-            title: product.title,
-            image: product.images[0].url,
-            price: product.price,
-            color: product.variants[0].color,
-            size: product.variants[0].size,
-            quantity: 1,
-          });
-
-          toast.success("Added to cart");
-        }}
+        onClick={handleQuickAdd}
       >
         Quick Add
       </button>
