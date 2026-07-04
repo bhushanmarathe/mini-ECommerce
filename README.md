@@ -108,6 +108,6 @@ npm run lint
 
 ---
 
-## Deployment
+## Live Demo
 
-Deployed on Vercel.
+**Link:** https://mini-e-commerce-pink.vercel.app/
